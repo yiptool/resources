@@ -20,7 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 //
-#include "resource_loader.h"
+#import "resource_loader.h"
+#import <Foundation/Foundation.h>
 
 std::string Resource::Loader::loadResource(const std::string & name)
 {
@@ -29,5 +30,12 @@ std::string Resource::Loader::loadResource(const std::string & name)
 
 Resource::StreamPtr Resource::Loader::openResource(const std::string & name)
 {
-	return openResourceFromFile(name);
+	std::string path;
+	@autoreleasepool {
+		path = [[NSString stringWithFormat:@"%@/%s",
+				[[NSBundle mainBundle] resourcePath],
+				name.c_str()]
+			UTF8String];
+	}
+	return openResourceFromFile(path);
 }
