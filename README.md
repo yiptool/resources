@@ -1,6 +1,6 @@
 
-YIP Resources
-=============
+Resources
+=========
 
 This is an utility library for cross-platform loading of resources embedded into
 an application built with `yip`.
@@ -9,7 +9,7 @@ Compiling this library
 ----------------------
 
 This library is not intended to be built directly. Instead it is supposed
-to be included into projects using the [Yip](https://github.com/zapolnov/yip.git).
+to be included into projects using the [Yip](https://github.com/yiptool/yip.git).
 
 Use the `import resources` directive in your `Yipfile` to use this library.
 
