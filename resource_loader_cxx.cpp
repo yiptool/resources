@@ -21,9 +21,15 @@
 // THE SOFTWARE.
 //
 #include "resource_loader.h"
+#include <stdexcept>
 #include <unordered_map>
 #include <sstream>
+
+#ifdef __ANDROID__
+#include <backward/strstream>
+#else
 #include <strstream>
+#endif
 
 extern std::unordered_map<std::string, std::pair<const void *, size_t>> __yip_resources;
 
