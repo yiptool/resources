@@ -35,7 +35,12 @@ sources:osx,ios
 	resource_loader.mm
 }
 
-sources:!osx,ios
+sources:android
+{
+	resource_loader_android.cpp
+}
+
+sources:!osx,ios,android
 {
 	resource_loader_cxx.cpp
 }
