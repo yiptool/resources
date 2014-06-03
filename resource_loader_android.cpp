@@ -73,6 +73,30 @@ namespace
 			return std::char_traits<char>::to_int_type(*gptr());
 		}
 
+		pos_type seekoff(off_type off, std::ios_base::seekdir dir, std::ios_base::openmode which)
+		{
+			int whence = -1;
+			switch (dir)
+			{
+			case std::ios_base::beg: whence = SEEK_SET; break;
+			case std::ios_base::cur: whence = SEEK_CUR; break;
+			case std::ios_base::end: whence = SEEK_END; break;
+			default: throw std::runtime_error("invalid seek direction.");
+			}
+
+			off_t pos = AAsset_seek(m_Asset, off_t(off), whence);
+			if (pos < 0)
+			{
+				std::stringstream ss;
+				ss << "seek failed in asset '" << m_Name << "'.";
+				throw std::runtime_error(ss.str());
+			}
+
+			setg(eback(), egptr(), egptr());
+
+			return pos_type(pos);
+		}
+
 	private:
 		AAsset * m_Asset;
 		std::string m_Name;
